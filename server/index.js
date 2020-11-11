@@ -88,12 +88,12 @@ app.post('/api/user/login', (req, res) => {
 
 app.get('/api/user/auth', auth, (req, res) => {
   res.status(200).json({
-    success: true,
+    isAuth: true,
     data: Object.assign(
       {
         isAdmin: req.user.role === 0 ? false : true
       },
-      req.data
+      req.user._doc
     )
   });
 });

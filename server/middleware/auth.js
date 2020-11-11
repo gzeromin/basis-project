@@ -7,10 +7,15 @@ let auth = (req, res, next) => {
   // decrypt token and find user
   User.findByToken(token, (err, user) => {
     if (err) throw err;
-    if (!user) return res.json({ isAuth: false, error: true });
+    if (!user)
+      return res.json({
+        isAuth: false,
+        data: {}
+      });
 
     req.token = token;
     req.user = user;
+    console.log(user);
     next();
   });
 };
