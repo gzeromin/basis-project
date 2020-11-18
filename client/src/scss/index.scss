@@ -1,0 +1,9 @@
+@import "abstracts/variables";
+
+@import "base/base";
+
+.views {
+  background-color: pink;
+  height: calc(100vh - #{ $nav-height } - #{ $footer-height});
+  overflow-y: scroll;
+}
