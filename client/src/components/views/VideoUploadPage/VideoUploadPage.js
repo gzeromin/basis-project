@@ -91,20 +91,20 @@ function VideoUploadPage(props) {
     axios.post('/api/video/uploadfiles', formData, config).then(response => {
       if(response.data.success) {
         let variable = {
-          filePath: response.data.filepath,
           fileName: response.data.fileName
         }
         setFilePath(response.data.filePath);
-
-        //generate thumnail with this filepath!
-        axios.post('/api/video/thumbnail', variable).then(response => {
-          if(response.data.success) {
+        
+        //gerenate thumbnail with this filepath ! 
+        axios.post('/api/video/thumbnail', variable).then(res => {
+          if(res.data.success) {
             setDuration(response.data.fileDuration);
             setThumbnail(response.data.thumbFilepath);
           } else {
             alert('Failed to make the thumbnails');
           }
-        })
+          console.log(res);
+        });
       } else {
         alert('failed to save the video in server');
       }
