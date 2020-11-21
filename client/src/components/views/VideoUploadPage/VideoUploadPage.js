@@ -87,7 +87,7 @@ function VideoUploadPage(props) {
       header: {'content-type': 'multipart/form-data'}
     }
     formData.append('file', files[0])
-
+    console.log(files[0]);
     axios.post('/api/video/uploadfiles', formData, config).then(response => {
       if(response.data.success) {
         let variable = {
@@ -158,6 +158,7 @@ function VideoUploadPage(props) {
           ))}
         </select>
 
+        <br/><br/>
         <button onClick={onSubmit}>
           Submit
         </button>

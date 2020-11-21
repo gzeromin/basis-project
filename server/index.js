@@ -43,6 +43,7 @@ new Database();
 
 app.get('/', (req, res) => res.send('hello??'));
 
-app.use('/api/user', require('./routes/users'));
+app.use('/api/user', require('./routes/user'));
+app.use('/api/video', require('./routes/video'));
 
 app.listen(port, () => console.log(`example ${port}`));
