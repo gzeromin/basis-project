@@ -47,15 +47,15 @@ router.post('/login', (req, res) => {
 });
 
 router.get('/auth', auth, (req, res) => {
-  res.status(200).json({
-    isAuth: true,
-    data: Object.assign(
+  res.status(200).json(
+    Object.assign(
       {
+        isAuth: true,
         isAdmin: req.user.role === 0 ? false : true
       },
       req.user._doc
     )
-  });
+  );
 });
 
 router.get('/logout', auth, (req, res) => {

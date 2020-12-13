@@ -29,16 +29,16 @@ export default function (SpecificComponent, option, adminRoute = null) {
             props.history.push("/");
           } else {
             if(!option) {
-              props.history.push("/");
+              //props.history.push("/");
             }
           }
         }
 
       });
-    }, []);
+    }, [dispatch, props.history]);
 
     return (
-      <SpecificComponent />
+      <SpecificComponent {...props}/>
     )
   }
 

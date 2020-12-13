@@ -53,22 +53,49 @@ function RegisterPage(props) {
   }
 
   return (
-    <div>
-      <form onSubmit={onSubmitHandler}>
-        <label>Email</label>
-        <input type="email" value={Email} onChange={onEmailHandler} />
-        <label>Name</label>
-        <input type="text" value={Name} onChange={onNameHandler} />
-        <label>Password</label>
-        <input type="password" value={Password} onChange={onPasswordHandler} />
-        <label>Confirm Password</label>
-        <input type="password" value={ConfirmPassword} onChange={onConfirmPasswordHandler} />
-        <br />
-        <button type="submit">
-          Sign Up
-        </button>
-      </form>
-    </div>
+    <form
+      className='center'
+      onSubmit={onSubmitHandler}
+    >
+      <label>Email</label>
+      <input 
+        className='center-input'
+        type="email" 
+        value={Email} 
+        onChange={onEmailHandler} 
+      />
+      <br/>
+      <label>Name</label>
+      <input 
+        className='center-input'
+        type="text" 
+        value={Name} 
+        onChange={onNameHandler} 
+      />
+      <br/>
+      <label>Password</label>
+      <input 
+        className='center-input'
+        type="password" 
+        value={Password} 
+        onChange={onPasswordHandler} 
+      />
+      <br/>
+      <label>Confirm Password</label>
+      <input 
+        className='center-input'
+        type="password" 
+        value={ConfirmPassword} 
+        onChange={onConfirmPasswordHandler} 
+      />
+      <br />
+      <button 
+        className='center-button'
+        type="submit"
+      >
+        Sign Up
+      </button>
+    </form>
   )
 }
 

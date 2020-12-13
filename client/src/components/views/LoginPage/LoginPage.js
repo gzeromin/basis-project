@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../../_actions/user_action';
 import { withRouter } from 'react-router-dom';
@@ -6,8 +7,8 @@ import { withRouter } from 'react-router-dom';
 function LoginPage(props) {
   const dispatch = useDispatch();
 
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
+  const [Email, setEmail] = useState('');
+  const [Password, setPassword] = useState('');
 
   const onEmailHandler = (event) => {
     setEmail(event.currentTarget.value);
@@ -28,6 +29,7 @@ function LoginPage(props) {
     dispatch(loginUser(body))
       .then(res => {
         if(res.payload.success) {
+          window.localStorage.setItem('userId', res.payload.data._id);
           props.history.push('/');
         } else {
           alert("Error");
@@ -36,18 +38,39 @@ function LoginPage(props) {
   }
 
   return (
-    <div>
-      <form onSubmit={onSubmitHandler}>
-        <label>Email</label>
-        <input type="email" value={Email} onChange={onEmailHandler} />
-        <label>Password</label>
-        <input type="password" value={Password} onChange={onPasswordHandler} />
-        <br />
-        <button type="submit">
-          Login
-        </button>
-      </form>
-    </div>
+    <form 
+      className='center'
+      onSubmit={onSubmitHandler}
+    >
+      <label>Email</label>
+      <input
+        className='center-input'
+        type="email" 
+        value={Email} 
+        onChange={onEmailHandler} 
+      />
+      <br/>
+      <label>Password</label>
+      <input 
+        className='center-input'
+        type="password" 
+        value={Password} 
+        onChange={onPasswordHandler} 
+      />
+      <br />
+      <button 
+        className='center-button'
+        type="submit"
+      >
+        Login
+      </button>
+      <Link
+        className='center-button'
+        to="/register"
+      >
+        Register
+      </Link>
+    </form>
   )
 }
 

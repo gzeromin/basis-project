@@ -1,7 +1,7 @@
 //google font - nanum gothic & lato
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300&family=Nanum+Gothic:wght@400;700;800&display=swap');
 //icon font
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp");
 
 * {
   margin: 0;
@@ -15,5 +15,14 @@ html {
 
 body {
   font-family: 'Nanum Gothic', sans-serif;
-  font-size: 2rem;
+  font-size: 1.4rem;
+  line-height: 1.5;
+}
+
+.selected {
+  color: $color-primary;
+}
+
+.not-selected {
+  color: $color-black700;
 }

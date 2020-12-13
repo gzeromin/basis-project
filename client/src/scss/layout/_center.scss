@@ -1,0 +1,12 @@
+.center {
+  width: 35rem;
+  margin: 35vh auto;
+  &-input {
+    float: right;
+    width: 20rem;
+  }
+  &-button {
+    margin: .5rem;
+    float: right;
+  }
+}

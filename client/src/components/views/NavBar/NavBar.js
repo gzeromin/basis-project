@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import './NavBar.scss';
+import style from './NavBar.module.scss';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -22,28 +22,34 @@ function NavBar(props) {
   if(user.userData && !user.userData.isAuth) {
     login = (
       <div>
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
+        <Link to="/video">Video</Link>     
+        <Link 
+          className={style['login-area']}
+          to="/login"
+        >
+          <i className='material-icons'>login</i>
+        </Link>
       </div>
     )
   } else {
     login = (
       <div>
-        <Link to="/video/upload">Video</Link>
-        <button
+        <Link to="/video">Video</Link>
+        <Link to="/video/upload">Upload</Link>
+        <Link to="/video/subscription">Subscription</Link>
+        <i 
+          className={'material-icons '+style['login-area']}
           onClick={logoutHandler}
         >
-          Logout
-        </button>
+          logout
+        </i>
       </div>
     )
   }
 
   return (
-    <div className='nav'>
-      NavBar
-      {login}
-      
+    <div className={style['nav']}>
+      {login} 
     </div>
   )
 }

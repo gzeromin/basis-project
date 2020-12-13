@@ -1,0 +1,12 @@
+@import '../../../scss/abstracts/variables';
+
+.nav {
+  height: $nav-height;
+  background-color: yellow;
+  padding: calc(#{$nav-height} * .3);
+}
+
+.login-area {
+  float: right;
+  cursor: pointer;
+}
