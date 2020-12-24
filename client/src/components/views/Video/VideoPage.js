@@ -1,10 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import Auth from "../../../hoc/auth";
 import axios from 'axios';
 import moment from 'moment';
+import SubNavBar from "../SubNavBar/SubNavBar";
+import { useSelector } from 'react-redux';
 
 function Video() {
 
   const [Videos, setVideos] = useState([]);
+  const [funcMenus, setFuncMenus] = useState([
+    'upload',
+    'subScription'
+  ]);
 
   useEffect(() => {
     axios.get('/api/video/getVideos').then(res => {
@@ -39,11 +46,32 @@ function Video() {
     ) 
   });
 
+  const user = useSelector(state => state.user);
+  let login;
+  if(user.userData && !user.userData.isAuth) {
+    login = (
+      <div>
+        <div>Recommended</div>
+        <hr/>
+        { renderCards }
+      </div>
+    )
+  } else {
+    login = (
+      <div>
+        <SubNavBar funcMenus={funcMenus} />
+        <div className='views-sub'>
+          <div>Recommended</div>
+          <hr/>
+          { renderCards }
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div>
-      <div>Recommended</div>
-      <hr/>
-      { renderCards }
+      {login}
     </div>
   )
 }

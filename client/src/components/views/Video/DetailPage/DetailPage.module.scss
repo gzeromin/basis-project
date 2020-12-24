@@ -1,7 +1,7 @@
 @import '../../../../scss/abstracts/variables';
 
 .postPage {
-  width: 70vw;
+  width: calc((100vw - #{ $personal-width }) * .7);
   padding: 3rem 4rem;
 }
 
@@ -14,5 +14,5 @@
   top: $nav-height;
   right: 0;
   margin-top: 1rem;
-  width: 30vw;
+  width: calc((100vw - #{ $personal-width }) * .3);
 }

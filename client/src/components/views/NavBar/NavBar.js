@@ -35,8 +35,6 @@ function NavBar(props) {
     login = (
       <div>
         <Link to="/video">Video</Link>
-        <Link to="/video/upload">Upload</Link>
-        <Link to="/video/subscription">Subscription</Link>
         <i 
           className={'material-icons '+style['login-area']}
           onClick={logoutHandler}

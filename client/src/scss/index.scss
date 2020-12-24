@@ -6,7 +6,12 @@
 @import "layout/center";
 
 .views {
+  position: relative;
+  padding: 1rem;
   background-color: pink;
   height: calc(100vh - #{ $nav-height } - #{ $footer-height});
   overflow-y: scroll;
+  &-sub {
+    margin-left: $personal-width;
+  }
 }

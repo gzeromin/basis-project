@@ -3,6 +3,7 @@ import Dropzone from 'react-dropzone';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import SubNavBar from "../../SubNavBar/SubNavBar";
 
 const Private = [
   {value: 0, label: 'Private'},
@@ -19,6 +20,11 @@ const Category = [
 ]
 function VideoUploadPage(props) {
 
+  const [funcMenus, setFuncMenus] = useState([
+    'upload',
+    'subScription'
+  ]);
+  
   const user = useSelector(state => state.user);
 
   const [title, setTitle] = useState('');
@@ -116,56 +122,59 @@ function VideoUploadPage(props) {
 
   return (
     <div>
-      <div>
-        Upload Video
-      </div>
-      <form onSubmit={onSubmit}>
+      <SubNavBar funcMenus={funcMenus} />
+      <div className='views-sub'>
         <div>
-          <Dropzone
-            onDrop={onDrop}
-            multiple={false}
-            maxSize={800000000}
-            >
-              {({getRootProps, getInputProps}) => (
-                <div {...getRootProps()}>
-                  <input type="text" {...getInputProps()}/>
-                  <i className="material-icons">add</i>
-                </div>
-              )}
-          </Dropzone>
-          {Thumbnail !== '' &&
-            <div>
-              <img src={`http://localhost:9090/${Thumbnail}`} alt='haha' />
-            </div>
-          }
+          Upload Video
         </div>
-        <br/><br/>
-        <label>Title</label>
-        <input type="text" onChange={handleChangeTitle} value={title}/>
+        <form onSubmit={onSubmit}>
+          <div>
+            <Dropzone
+              onDrop={onDrop}
+              multiple={false}
+              maxSize={800000000}
+              >
+                {({getRootProps, getInputProps}) => (
+                  <div {...getRootProps()}>
+                    <input type="text" {...getInputProps()}/>
+                    <i className="material-icons">add</i>
+                  </div>
+                )}
+            </Dropzone>
+            {Thumbnail !== '' &&
+              <div>
+                <img src={`http://localhost:9090/${Thumbnail}`} alt='haha' />
+              </div>
+            }
+          </div>
+          <br/><br/>
+          <label>Title</label>
+          <input type="text" onChange={handleChangeTitle} value={title}/>
 
-        <br/><br/>
-        <label>Description</label>
-        <textarea onChange={handleChangeDescription} value={Description}/>
+          <br/><br/>
+          <label>Description</label>
+          <textarea onChange={handleChangeDescription} value={Description}/>
 
-        <br/><br/>
-        <select onChange={handleChangeOne}>
-          {Private.map((item, index) => (
-            <option key={index} value={item.value}>{item.label}</option>
-          ))}
-        </select>
+          <br/><br/>
+          <select onChange={handleChangeOne}>
+            {Private.map((item, index) => (
+              <option key={index} value={item.value}>{item.label}</option>
+            ))}
+          </select>
 
-        <br/><br/>
-        <select onChange={handleChangeTwo}>
-          {Category.map((item, index) => (
-            <option key={index} value={item.value}>{item.label}</option>
-          ))}
-        </select>
+          <br/><br/>
+          <select onChange={handleChangeTwo}>
+            {Category.map((item, index) => (
+              <option key={index} value={item.value}>{item.label}</option>
+            ))}
+          </select>
 
-        <br/><br/>
-        <button onClick={onSubmit}>
-          Submit
-        </button>
-      </form>
+          <br/><br/>
+          <button onClick={onSubmit}>
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   )
 }

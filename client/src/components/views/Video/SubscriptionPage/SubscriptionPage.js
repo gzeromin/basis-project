@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import SubNavBar from "../../SubNavBar/SubNavBar";
 
 function SubscriptionPage() {
 
   const [Videos, setVideos] = useState([]);
+  const [funcMenus, setFuncMenus] = useState([
+    'upload',
+    'subScription'
+  ]);
 
   let variable = { userFrom: localStorage.getItem('userId')};
 
@@ -43,9 +48,12 @@ function SubscriptionPage() {
 
   return (
     <div>
-      <div>Subscribed Videos</div>
-      <hr/>
-      { renderCards }
+      <SubNavBar funcMenus={funcMenus} />
+      <div className='views-sub'>
+        <div>Subscribed Videos</div>
+        <hr/>
+        { renderCards }
+      </div>
     </div>
   )
 }
