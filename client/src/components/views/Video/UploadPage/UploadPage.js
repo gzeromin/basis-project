@@ -24,7 +24,7 @@ function VideoUploadPage(props) {
     'upload',
     'subScription'
   ]);
-  
+
   const user = useSelector(state => state.user);
 
   const [title, setTitle] = useState('');
@@ -127,6 +127,7 @@ function VideoUploadPage(props) {
         <div>
           Upload Video
         </div>
+        <hr />
         <form onSubmit={onSubmit}>
           <div>
             <Dropzone

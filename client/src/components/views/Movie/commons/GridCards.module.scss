@@ -1,0 +1,18 @@
+@import '../../../../scss/abstracts/mixins';
+
+.grid {
+  flex: 1;
+  padding: 1rem;
+  &-image {
+    @include mq('small-screen-1') {
+      height: 35rem;
+    }
+    @include mq('small-screen-2') {
+      height: 25rem;
+    }
+    @include mq('small-screen-3') {
+      height: 15rem;
+
+    }
+  }
+}

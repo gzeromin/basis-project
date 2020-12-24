@@ -21,32 +21,28 @@ function NavBar(props) {
   let login;
   if(user.userData && !user.userData.isAuth) {
     login = (
-      <div>
-        <Link to="/video">Video</Link>     
-        <Link 
-          className={style['login-area']}
-          to="/login"
-        >
-          <i className='material-icons'>login</i>
-        </Link>
-      </div>
+      <Link 
+        className={style['login-area']}
+        to="/login"
+      >
+        <i className='material-icons'>login</i>
+      </Link>
     )
   } else {
     login = (
-      <div>
-        <Link to="/video">Video</Link>
-        <i 
-          className={'material-icons '+style['login-area']}
-          onClick={logoutHandler}
-        >
-          logout
-        </i>
-      </div>
+      <i 
+        className={'material-icons '+style['login-area']}
+        onClick={logoutHandler}
+      >
+        logout
+      </i>
     )
   }
 
   return (
     <div className={style['nav']}>
+      <Link to="/video">Video</Link>
+      <Link to="/movie">Movie</Link>
       {login} 
     </div>
   )

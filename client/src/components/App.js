@@ -11,6 +11,7 @@ import VideoPage from "./views/Video/VideoPage";
 import UploadPage from "./views/Video/UploadPage/UploadPage";
 import DetailPage from "./views/Video/DetailPage/DetailPage";
 import SubscriptionPage from "./views/Video/SubscriptionPage/SubscriptionPage";
+import MoviePage from "./views/Movie/MoviePage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route exact path="/video/upload" component={Auth(UploadPage, true)} />
           <Route exact path="/video/subscription" component={Auth(SubscriptionPage, true)} />
           <Route exact path="/video/:videoId" component={Auth(DetailPage, null)} />
+          <Route exact path="/movie" component={Auth(MoviePage, null)} />
         </Switch>
       </div>
       <Footer />
