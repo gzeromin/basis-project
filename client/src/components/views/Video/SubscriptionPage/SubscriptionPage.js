@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import SubNavBar from "../../SubNavBar/SubNavBar";
 
 function SubscriptionPage() {
 
@@ -48,8 +47,7 @@ function SubscriptionPage() {
 
   return (
     <div>
-      <SubNavBar funcMenus={funcMenus} />
-      <div className='views-sub'>
+      <div>
         <div>Subscribed Videos</div>
         <hr/>
         { renderCards }

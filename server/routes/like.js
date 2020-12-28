@@ -7,6 +7,8 @@ router.post('/getLikes', (req, res) => {
   let variable = {};
   if(req.body.videoId) {
     variable = { videoId: req.body.videoId};
+  } else if(req.body.movieId) {
+    variable = { movieId: req.body.movieId};
   } else {
     variable = { commentId: req.body.commentId};
   }
@@ -21,12 +23,16 @@ router.post('/getDislikes', (req, res) => {
   let variable = {};
   if(req.body.videoId) {
     variable = { videoId: req.body.videoId};
+  } else if(req.body.movieId) {
+    variable = { movieId: req.body.movieId};
   } else {
     variable = { commentId: req.body.commentId};
   }
 
   Dislike.find(variable).exec((err, dislikes) => {
-    if(err) return res.status(400).send(err);
+    if(err) {
+      return res.status(400).send(err);
+    }
     res.status(200).json({success: true, dislikes});
   })
 });
@@ -36,6 +42,8 @@ router.post('/upLike', (req, res) => {
 
   if(req.body.videoId) {
     variable = { videoId: req.body.videoId, userId: req.body.userId};
+  } else if(req.body.movieId) {
+    variable = { movieId: req.body.movieId, userId: req.body.userId};
   } else {
     variable = { commentId: req.body.commentId, userId: req.body.userId};
   }
@@ -56,6 +64,8 @@ router.post('/unLike', (req, res) => {
 
   if(req.body.videoId) {
     variable = { videoId: req.body.videoId, userId: req.body.userId};
+  } else if(req.body.movieId) {
+    variable = { movieId: req.body.movieId, userId: req.body.userId};
   } else {
     variable = { commentId: req.body.commentId, userId: req.body.userId};
   }
@@ -71,6 +81,8 @@ router.post('/upDislike', (req, res) => {
 
   if(req.body.videoId) {
     variable = { videoId: req.body.videoId, userId: req.body.userId};
+  } else if(req.body.movieId) {
+    variable = { movieId: req.body.movieId, userId: req.body.userId};
   } else {
     variable = { commentId: req.body.commentId, userId: req.body.userId};
   }
@@ -91,6 +103,8 @@ router.post('/unDislike', (req, res) => {
 
   if(req.body.videoId) {
     variable = { videoId: req.body.videoId, userId: req.body.userId};
+  } else if(req.body.movieId) {
+    variable = { movieId: req.body.movieId, userId: req.body.userId};
   } else {
     variable = { commentId: req.body.commentId, userId: req.body.userId};
   }

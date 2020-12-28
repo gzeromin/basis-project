@@ -13,6 +13,9 @@ const likeSchema = mongoose.Schema({
   videoId: {
     type: Schema.Types.ObjectId,
     ref: 'Video'
+  },
+  movieId: {
+    type: Number
   }
 }, { timestamps: true });
 

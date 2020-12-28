@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SideVideo from './Sections/SideVideo';
 import Subscriber from './Sections/Subscriber';
-import Comments from './Sections/Comment/Comment';
-import LikeDislikes from './Sections/Comment/Sections/LikeDislikes';
+import Comments from '../../../commons/Comment/Comment';
+import LikeDislikes from '../../../commons/LikeDislikes/LikeDislikes';
 import style from './DetailPage.module.scss';
 
 function VideoDetailPage(props) {
@@ -45,7 +45,7 @@ function VideoDetailPage(props) {
       <div>
         <div className={style.postPage}>
           <video className={style.videoDetail} src={`http://localhost:9090/${Video.filepath}`} controls></video>
-          <LikeDislikes video videoId={videoId} userId={localStorage.getItem('userId')} />
+          <LikeDislikes videoId={videoId} userId={localStorage.getItem('userId')} />
           {subscribeButton}        
           <img alt='avatar' src={Video.writer && Video.writer.image} />
           <span>{Video.title}</span>

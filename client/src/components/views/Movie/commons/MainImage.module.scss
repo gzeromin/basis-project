@@ -1,0 +1,13 @@
+.info {
+  position: absolute;
+  max-width: 500px;
+  bottom: 2rem;
+  margin-left: 2rem;
+  &-title{
+    color: white;
+  }
+  &-text{
+    color: white;
+    font-size: 1rem;
+  }
+}

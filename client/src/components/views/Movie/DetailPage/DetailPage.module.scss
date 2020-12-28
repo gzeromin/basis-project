@@ -1,0 +1,18 @@
+.wrapper {
+  width: 85%;
+  margin: 1rem auto;
+  &-flex {
+    display: flex;
+    justify-content: flex-end;
+  }
+  &-actors {
+    display: flex;
+    justify-content: center;
+    margin: 2rem;
+  }
+  &-actorList {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

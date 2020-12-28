@@ -50,6 +50,7 @@ router.get('/auth', auth, (req, res) => {
   res.status(200).json(
     Object.assign(
       {
+        isLogin: true,
         isAuth: true,
         isAdmin: req.user.role === 0 ? false : true
       },

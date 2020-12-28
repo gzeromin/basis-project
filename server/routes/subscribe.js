@@ -34,7 +34,6 @@ router.post('/subscribe', (req, res) => {
 });
 
 router.post('/unsubscribe', (req, res) => {
-  console.log(req.body);
   Subscriber.findOneAndDelete({
     userTo: req.body.userTo,
     userFrom: req.body.userFrom

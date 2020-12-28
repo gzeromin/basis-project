@@ -41,8 +41,9 @@ function NavBar(props) {
 
   return (
     <div className={style['nav']}>
-      <Link to="/video">Video</Link>
-      <Link to="/movie">Movie</Link>
+      <Link to="/video/home">Video</Link>
+      &nbsp;
+      <Link to="/movie/home">Movie</Link>
       {login} 
     </div>
   )
