@@ -2,8 +2,8 @@
 
 .nav {
   height: $nav-height;
-  background-color: yellow;
   padding: calc(#{$nav-height} * .3);
+  box-shadow: 0 .05rem 0 0 rgba(0,0,0,.1);
 }
 
 .login-area {

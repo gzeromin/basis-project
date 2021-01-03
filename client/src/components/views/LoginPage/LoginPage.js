@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../../_actions/user_action';
 import { withRouter } from 'react-router-dom';
+import style from './LoginPage.module.scss';
 
 function LoginPage(props) {
   const dispatch = useDispatch();
@@ -39,12 +40,12 @@ function LoginPage(props) {
 
   return (
     <form 
-      className='center'
+      className={style['login']}
       onSubmit={onSubmitHandler}
     >
       <label>Email</label>
       <input
-        className='center-input'
+        className={style['login-input']}
         type="email" 
         value={Email} 
         onChange={onEmailHandler} 
@@ -52,20 +53,20 @@ function LoginPage(props) {
       <br/>
       <label>Password</label>
       <input 
-        className='center-input'
+        className={style['login-input']}
         type="password" 
         value={Password} 
         onChange={onPasswordHandler} 
       />
       <br />
       <button 
-        className='center-button'
+        className={style['login-button']}
         type="submit"
       >
         Login
       </button>
       <Link
-        className='center-button'
+        className={style['login-button']}
         to="/register"
       >
         Register

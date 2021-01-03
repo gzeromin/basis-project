@@ -1,15 +1,15 @@
 @import "abstracts/variables";
 @import "abstracts/mixins";
+@import "abstracts/extends";
 
 @import "base/base";
 @import "base/utilities";
 
-@import "layout/center";
+// @import "layout/center";
 
 .views {
   position: relative;
-  background-color: pink;
-  height: calc(100vh - #{ $nav-height } - #{ $footer-height});
+  height: calc(100vh - #{ $nav-height } - #{ $footer-height });
   overflow-y: scroll;
   &-sub {
     margin-left: $personal-width;

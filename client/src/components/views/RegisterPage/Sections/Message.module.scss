@@ -1,0 +1,26 @@
+@import '../../../../scss/abstracts/variables';
+
+.message {
+  width: 100%;
+  padding: 1rem;
+}
+
+%common {
+  max-width: 68%;
+  border-radius: 1rem;
+  padding: .5rem 1rem;
+  background-color:  rgba(0,0,0,.1);
+}
+
+.user {
+  @extend %common;
+
+  float: right;
+  background-color: $color-primary;
+}
+
+.jmin {
+  @extend %common;
+
+  float: left;
+}
