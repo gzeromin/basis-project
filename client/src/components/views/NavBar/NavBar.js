@@ -41,6 +41,9 @@ function NavBar(props) {
 
   return (
     <div className={style['nav']}>
+      {user.userData && user.userData.isAdmin
+        && <Link to="/master/home">Master</Link>
+      }
       <Link to="/video/home">Video</Link>
       &nbsp;
       <Link to="/movie/home">Movie</Link>

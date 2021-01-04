@@ -9,11 +9,10 @@ import SubscriptionPage from './SubscriptionPage/SubscriptionPage';
 function Video(props) {
 
   const user = useSelector(state => state.user);
-  
-  const [funcMenus, setFuncMenus] = useState([
+  const funcMenus = [
     'upload',
     'subScription'
-  ]);
+  ];
 
   let showPage = <DefaultPage />;
   if(props.match.params.subFunc === 'upload') {

@@ -1,4 +1,4 @@
-@mixin mq($screen-width) {
+@mixin mq-w($screen-width) {
   @if $screen-width == 'small-screen-1' {
     @media screen and (min-width: 1200px) {
       @content;
@@ -11,6 +11,24 @@
   }
   @else if $screen-width == 'small-screen-3' {
     @media screen and (max-width: 700px) {
+      @content;
+    }
+  }
+}
+
+@mixin mq-h($screen-height) {
+  @if $screen-height == 'small-screen-1' {
+    @media screen and (min-height: 800px) {
+      @content;
+    }
+  }
+  @else if $screen-height == 'small-screen-2' {
+    @media screen and (min-height: 601px) and (max-height: 799px) {
+      @content;
+    }
+  }
+  @else if $screen-height == 'small-screen-3' {
+    @media screen and (max-height: 600px) {
       @content;
     }
   }

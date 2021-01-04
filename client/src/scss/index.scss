@@ -9,7 +9,7 @@
 
 .views {
   position: relative;
-  height: calc(100vh - #{ $nav-height } - #{ $footer-height });
+  height: $body-height;
   overflow-y: scroll;
   &-sub {
     margin-left: $personal-width;

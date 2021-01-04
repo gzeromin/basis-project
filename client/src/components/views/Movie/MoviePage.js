@@ -8,9 +8,9 @@ import FavoritePage from './FavoritePage/FavoritePage';
 function MoviePage(props) {
 
   const user = useSelector(state => state.user);
-  const [funcMenus, setFuncMenus] = useState([
+  const funcMenus = [
     'favorite',
-  ]);
+  ];
 
   let showPage = <DefaultPage />;
   if(props.match.params.subFunc === 'favorite') {

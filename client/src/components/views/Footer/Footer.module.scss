@@ -7,7 +7,7 @@
   line-height: $footer-height;
   color:$color-footer-font;
   padding: .1rem 3rem .1rem 3rem;
-  box-shadow: 0 0 0 .05rem rgba(0,0,0,.05);
+  box-shadow: 0 0 0 0.05rem rgba(0,0,0,.2);
 
 
   @extend %clearfix;

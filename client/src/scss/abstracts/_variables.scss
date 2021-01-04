@@ -1,8 +1,9 @@
 $nav-height: 8vh;
 $footer-height: 4vh;
+$body-height: calc(100vh - #{$nav-height} - #{$footer-height});
 $personal-width: 20vw;
 
-$color-primary: #ff008c;
+$color-primary: #ff3187;
 $color-black700: #616161;
 
 $color-font:  rgb(33, 37, 41);

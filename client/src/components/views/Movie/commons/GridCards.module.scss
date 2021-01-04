@@ -4,15 +4,14 @@
   flex: 1;
   padding: 1rem;
   &-image {
-    @include mq('small-screen-1') {
+    @include mq-w('small-screen-1') {
       height: 35rem;
     }
-    @include mq('small-screen-2') {
+    @include mq-w('small-screen-2') {
       height: 25rem;
     }
-    @include mq('small-screen-3') {
+    @include mq-w('small-screen-3') {
       height: 15rem;
-
     }
   }
 }

@@ -8,9 +8,10 @@ import LoginPage from "./views/LoginPage/LoginPage";
 import RegisterPage from "./views/RegisterPage/RegisterPage";
 import Footer from "./views/Footer/Footer";
 import VideoPage from "./views/Video/VideoPage";
-import DetailPage from "./views/Video/DetailPage/DetailPage";
+import VideoDetail from "./views/Video/DetailPage/DetailPage";
 import MoviePage from "./views/Movie/MoviePage";
 import MovieDetail from "./views/Movie/DetailPage/DetailPage";
+import MasterPage from "./views/MasterPage/MasterPage";
 
 function App() {
   return (
@@ -22,9 +23,10 @@ function App() {
           <Route exact path="/login" component={Auth(LoginPage, false)} />
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
           <Route exact path="/video/:subFunc" component={Auth(VideoPage, null)} />
-          <Route exact path="/video/detail/:videoId" component={Auth(DetailPage, null)} />
+          <Route exact path="/video/detail/:videoId" component={Auth(VideoDetail, null)} />
           <Route exact path="/movie/:subFunc" component={Auth(MoviePage, null)} />
           <Route exact path="/movie/detail/:movieId" component={Auth(MovieDetail, null)} />
+          <Route exact path="/master/:subFunc" component={Auth(MasterPage, true)} />
         </Switch>
       </div>
       <Footer />

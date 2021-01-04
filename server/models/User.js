@@ -12,11 +12,18 @@ const userSchema = mongoose.Schema({
   },
   password: {
     type: String,
-    minlength: 5
+    minlength: 1
   },
   name: {
     type: String,
     maxlength: 50
+  },
+  comment: {
+    type: String
+  },
+  mailCheck: {
+    type: Number,
+    default: 0
   },
   role: {
     type: Number,
