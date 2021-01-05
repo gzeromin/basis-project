@@ -25,6 +25,9 @@ const userSchema = mongoose.Schema({
     type: Number,
     default: 0
   },
+  mailCheckKey: {
+    type: String
+  },
   role: {
     type: Number,
     default: 0
@@ -56,8 +59,10 @@ userSchema.pre('save', function (next) {
 });
 
 userSchema.methods.comparePassword = function (plainPassword, cb) {
+  const user = this;
   bcrypt.compare(plainPassword, this.password, function (err, isMatch) {
-    if (err) return cb(err);
+    if (err) return cb('unvalid password');
+    if (user.mailCheck !== 1) return cb('not yet mail checked');
     cb(null, isMatch);
   });
 };
@@ -85,6 +90,10 @@ userSchema.statics.findByToken = function (token, cb) {
       cb(null, user);
     });
   });
+};
+
+userSchema.statics.getMailCheckKey = function (email) {
+  return jwt.sign(email, tokenString);
 };
 
 const User = mongoose.model('User', userSchema);

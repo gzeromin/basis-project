@@ -1,7 +1,6 @@
 @import '../../../../scss/abstracts/mixins';
 
 .grid {
-  flex: 1;
   padding: 1rem;
   &-image {
     @include mq-w('small-screen-1') {

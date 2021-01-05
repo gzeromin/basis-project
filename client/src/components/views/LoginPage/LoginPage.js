@@ -33,7 +33,7 @@ function LoginPage(props) {
           window.localStorage.setItem('userId', res.payload.data._id);
           props.history.push('/');
         } else {
-          alert("Error");
+          alert(res.payload.message);
         }
       });
   }

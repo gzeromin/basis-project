@@ -2,6 +2,18 @@ const express = require('express');
 const router = express.Router();
 const { auth } = require('../middleware/auth');
 const { User } = require('../models/User');
+const nodemailer = require('nodemailer');
+
+const createTransport = (user, pass) => {
+  return nodemailer.createTransport({
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+    auth: {
+      user, 
+      pass
+    }
+  });
+};
 
 router.post('/register', (req, res) => {
   const user = new User(req.body);
@@ -28,7 +40,7 @@ router.post('/login', (req, res) => {
       if (!isMatch) {
         return res.json({
           sucess: false,
-          message: 'unvalid password'
+          message: err
         });
       }
 
@@ -68,13 +80,72 @@ router.get('/logout', auth, (req, res) => {
   });
 });
 
-router.get('/allUsers', (req, res) => {
-  User.find((err, users) => {
+/** Member Page */
+router.get('/allMembers', (req, res) => {
+  User.find((err, members) => {
     if (err) return res.json({ success: false, err });
     return res.status(200).send({
       success: true,
-      result: users
+      result: members
     });
+  });
+});
+
+router.post('/updateMember', (req, res) => {
+  User.findByIdAndUpdate(req.body._id, req.body, (err, member) => {
+    if (err) return res.json({ success: false, err });
+    return User.find((err, members) => {
+      if (err) return res.json({ success: false, err });
+      return res.status(200).send({
+        success: true,
+        result: members
+      });
+    });
+  });
+});
+
+router.post('/sendMail', (req, res) => {
+  const smtpTransport = createTransport(req.body.email, req.body.pass);
+  const mailCheckKey = User.getMailCheckKey(req.body.member.email);
+  const mailText = '<h1>클릭하면 가입 완료!<h1>' + 'http://' + req.get('host') + '/api/user/confirmEmail?key=' + mailCheckKey;
+  const mailOpt = {
+    from: req.body.email,
+    to: req.body.member.email,
+    subject: 'From J.Min World [메일 인증 해줭~~]',
+    html: mailText
+  };
+  User.findByIdAndUpdate(req.body.member._id, {$set: {mailCheckKey : mailCheckKey}}, {useFindAndModify: false}, (errSaveKey, resultSaveKey) => {
+    if(errSaveKey) return res.json({ success: false, errSaveKey });
+    smtpTransport.sendMail(mailOpt, (errSendMail, resultSendMail) => {
+      smtpTransport.close();
+      if (errSendMail) {
+        console.log(errSendMail);
+        return User.findByIdAndUpdate(
+          req.body.member._id, {$unset: {mailCheckKey}}, {useFindAndModify: false},
+          (errRollBack, resultRollBack) => {
+            if(errRollBack) return res.json({success: false, errRollBack});
+            return res.json({ success: false, errRollBack });
+        });
+      }
+      return User.find((err, members) => {
+        if (err) return res.json({ success: false, err });
+        return res.status(200).send({
+          success: true,
+          result: members
+        });
+      });
+    });
+  });
+});
+
+router.get('/confirmEmail', (req, res) => {
+  User.updateOne({mailCheckKey: req.query.key}, {$set: {mailCheck: 1}}, (err, result) => {
+    if (err) return res.send('<script type="text/javascript"> alert("에러가 발생했습니다. 자세한 사항은 J.min world에 문의해주세요");</script>');
+    
+    if(result.n == 0) {
+      return res.send('<script type="text/javascript">alert("Not verified"); window.location="/";</script>');
+    }
+    return res.send('<script type="text/javascript">alert("Successfully verified"); window.location="/";</script>');
   });
 });
 

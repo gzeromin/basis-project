@@ -31,7 +31,7 @@ function NavBar(props) {
   } else {
     login = (
       <i 
-        className={'material-icons '+style['login-area']}
+        className={`material-icons ${style['login-area']}`}
         onClick={logoutHandler}
       >
         logout
@@ -42,10 +42,11 @@ function NavBar(props) {
   return (
     <div className={style['nav']}>
       {user.userData && user.userData.isAdmin
-        && <Link to="/master/home">Master</Link>
+        &&  <div className={style['nav-master']}>
+              <Link to="/master/home">Master</Link> &nbsp;
+            </div>
       }
-      <Link to="/video/home">Video</Link>
-      &nbsp;
+      <Link to="/video/home">Video</Link> &nbsp;
       <Link to="/movie/home">Movie</Link>
       {login} 
     </div>
