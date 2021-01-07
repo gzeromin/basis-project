@@ -23,8 +23,7 @@ function Video(props) {
 
   return (
     <div>
-      {user.userData 
-        && user.userData.isLogin 
+      {user.userData
         && user.userData.isAuth 
         &&
           <SubNavBar 
@@ -32,8 +31,7 @@ function Video(props) {
             funcMenus={funcMenus} 
           />
       }
-      <div className={`${user.userData 
-                        && user.userData.isLogin 
+      <div className={`${user.userData
                         && user.userData.isAuth ? 
                         'views-sub' 
                         : 

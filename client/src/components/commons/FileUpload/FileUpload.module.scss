@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dropBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30rem;
+  height: 24rem;
+  border: 1px solid lightgrey;
+}
+
+.icon {
+  font-size: 3rem;
+}
+
+.images {
+  display: flex;
+  width: 35rem;
+  height: 24rem;
+  overflow-x: scroll;
+  .image {
+    min-width: 30rem;
+    width: 30rem;
+    height: 24rem;
+  }
+}

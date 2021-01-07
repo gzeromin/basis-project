@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import style from '../DefaultPage/DefaultPage.module.scss';
 
 function SubscriptionPage() {
 
@@ -28,7 +29,7 @@ function SubscriptionPage() {
 
     return (
       <div key={index}>
-        <a href={`/video/${video._id}`}>
+        <a href={`/video/detail/${video._id}`}>
           <img alt='thumbnail' src={`http://localhost:9090/${video.thumbnail}`} />
           <div className="duration">
             <span>{minutes}:{seconds}</span>
@@ -49,8 +50,10 @@ function SubscriptionPage() {
     <div>
       <div>
         <div>Subscribed Videos</div>
-        <hr/>
-        { renderCards }
+        <hr/><br/>
+        <div className={style.wrapper}>
+          { renderCards }
+        </div>
       </div>
     </div>
   )

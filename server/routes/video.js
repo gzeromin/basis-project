@@ -5,12 +5,11 @@ const { Subscriber } = require('../models/Subscriber');
 const multer = require('multer');
 var ffmpeg = require('fluent-ffmpeg');
 const fs = require('fs');
-const { EWOULDBLOCK } = require('constants');
 
 // STORAGE MULTER CONFIG
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/');
+    cb(null, 'uploads/video/');
   },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}_${file.originalname}`);
@@ -43,16 +42,17 @@ router.post('/uploadVideo', (req, res) => {
   //save video info
   const video = new Video(req.body);
   video.save((err, doc) => {
-    if(err) return res.json({
-      success: false,
-      err
-    });
-    res.status(200).json({ success: true })
-  })
+    if (err)
+      return res.json({
+        success: false,
+        err
+      });
+    return res.status(200).json({ success: true });
+  });
 });
 
 router.post('/getVideoDetail', (req, res) => {
-  Video.findOne({ '_id': req.body.videoId })
+  Video.findOne({ _id: req.body.videoId })
     .populate('writer')
     .exec((err, videoDetail) => {
       if (err) return res.status(400).send(err);
@@ -66,16 +66,15 @@ router.get('/getVideos', (req, res) => {
     .exec((err, videos) => {
       if (err) return res.status(400).send(err);
       res.status(200).json({ success: true, videos });
-    })
+    });
 });
 
 router.post('/thumbnail', (req, res) => {
   const url = req.body.filePath;
   try {
-
     let fileDuration = '';
     let thumbFilepath = '';
-  
+
     // video info
     ffmpeg.ffprobe(url, function (err, metadata) {
       fileDuration = metadata.format.duration;
@@ -83,7 +82,7 @@ router.post('/thumbnail', (req, res) => {
     // create thumbnail
     ffmpeg(url)
       .on('filenames', function (filenames) {
-        thumbFilepath = 'uploads/thumbnails/' + filenames[0];
+        thumbFilepath = 'uploads/video/thumbnails/' + filenames[0];
       })
       .on('end', function () {
         return res.json({
@@ -97,7 +96,7 @@ router.post('/thumbnail', (req, res) => {
       })
       .screenshots({
         count: 3,
-        folder: 'uploads/thumbnails',
+        folder: 'uploads/video/thumbnails',
         size: '320x240',
         filename: 'thumbnail-%b.png'
       });
@@ -112,10 +111,9 @@ router.post('/thumbnail', (req, res) => {
 });
 
 router.post('/getSubscriptionVideos', (req, res) => {
-
   // need to find all of the users that i am subscribing to from subscriber collection
-  Subscriber.find({ 'userFrom': req.body.userFrom }).exec((err, subscribers) => {
-    if(err) return res.status(400).send(err);
+  Subscriber.find({ userFrom: req.body.userFrom }).exec((err, subscribers) => {
+    if (err) return res.status(400).send(err);
 
     let subscribedUser = [];
 
@@ -124,14 +122,14 @@ router.post('/getSubscriptionVideos', (req, res) => {
     });
 
     // need to fetch all of the videos that belong to the users that i found in previous step.
-    Video.find({ 
+    Video.find({
       writer: { $in: subscribedUser }
-    }).populate(
-      'writer'
-    ).exec((err, videos) => {
-      if(err) return res.status(400).send(err);
-      res.status(200).json({ success: true, videos });
-    });
+    })
+      .populate('writer')
+      .exec((err, videos) => {
+        if (err) return res.status(400).send(err);
+        res.status(200).json({ success: true, videos });
+      });
   });
 });
 

@@ -38,6 +38,15 @@ function MembersPage(props) {
       }
       updateMemberList();
     }
+
+    const setNewMember = (e) => {
+      if(e.target.checked) {
+        member.newMember = 1;
+      } else {
+        member.newMember = 0;
+      }
+      updateMemberList();
+    }
     
     const setRole = (e) => {
       member.role = e.target.value;
@@ -56,11 +65,11 @@ function MembersPage(props) {
       axios.post('/api/user/updateMember', member).then(res => {
         if(res.data.success) {
           setMemberList(res.data.result);
+          setModifyMember(null);
         } else {
           alert('Fail to get member List');
         }
       });
-      setModifyMember(null);
     };
     
     const cancel = () => {
@@ -84,14 +93,13 @@ function MembersPage(props) {
       }
       axios.post('/api/user/sendMail', reqObj).then(res => {
         if(res.data.success) {
+          setMemberList(res.data.result);
+          setSendMailMember(null);
           email = '';
           pass = '';
-          console.log(res.data.result);
-          setMemberList(res.data.result);
         } else {
           alert('fail');
         }
-        setSendMailMember(null);
       });
     }
     if(ModifyMember === member._id) {
@@ -112,6 +120,7 @@ function MembersPage(props) {
           <td className={style.td}>
             <input 
               type='checkbox' 
+              className={style['td-ckBox']}
               onChange={setMailCheck}
               checked={member.mailCheck === 1}
             />
@@ -125,6 +134,14 @@ function MembersPage(props) {
               <option value={1}> Admin </option>
               <option value={0}> Member </option>
             </select>
+          </td>
+          <td className={style.td}>
+            <input 
+              type='checkbox' 
+              className={style['td-ckBox']}
+              onChange={setNewMember}
+              checked={member.newMember === 1}
+            />
           </td>
           <td className={style.td}>
             <button 
@@ -169,6 +186,15 @@ function MembersPage(props) {
             ''
           }</td>
           <td className={style.td}>{member.role === 1 ? 'Admin': 'Member'}</td>
+          <td className={style.td}>{member.newMember === 1 ?
+            <i 
+              className={`material-icons`}
+            >
+              done
+            </i>
+            :
+            ''
+          }</td>
           <td className={style.td}>
             <button 
               className={style.button}
@@ -215,6 +241,15 @@ function MembersPage(props) {
           ''
         }</td>
         <td className={style.td}>{member.role === 1 ? 'Admin': 'Member'}</td>
+        <td className={style.td}>{member.newMember === 1 ?
+          <i 
+            className={`material-icons`}
+          >
+            done
+          </i>
+          :
+          ''
+        }</td>
         <td className={style.td}>
           <button 
             className={style.button}
@@ -249,6 +284,7 @@ function MembersPage(props) {
             <th className={style.th}>Email</th>
             <th className={style.th}>MailCheck</th>
             <th className={style.th}>Role</th>
+            <th className={style.th}>New</th>
             <th className={style.th}></th>
             <th className={style.th}></th>
           </tr>

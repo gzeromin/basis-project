@@ -4,12 +4,16 @@
   height: $nav-height;
   padding: calc(#{$nav-height} * .3);
   box-shadow: 0 .05rem 0 0 rgba(0,0,0,.1);
-  &-master {
-    display: inline;
+  * {
+    margin: 0 1.2rem;
   }
 }
 
 .login-area {
   float: right;
   cursor: pointer;
+}
+
+.inline {
+  display: inline;
 }

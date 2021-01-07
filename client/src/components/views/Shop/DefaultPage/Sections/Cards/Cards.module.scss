@@ -1,0 +1,72 @@
+$height: 38rem;
+$height-image: 24rem;
+$height-title: 4rem;
+$height-desc: 2rem;
+$height-footer: 5rem;
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  margin: 1rem;
+  margin-top: 2rem;
+  padding: 1rem;
+  width: 30rem;
+  height: $height;
+  border: 1px solid lightgrey;
+  border-radius: .4rem;
+  color: black;
+}
+
+.image {
+  margin: 0 auto;
+  width: 30rem;
+  height: $height-image;
+}
+
+.badges {
+  margin-top: -3rem;
+  width: 30rem;
+  text-align: center;
+}
+
+.badge {
+  justify-content: end;
+  vertical-align: bottom;
+  color: black;
+}
+
+.slideIndex {
+  color: white;
+}
+
+.title {
+  margin-top: 1rem;
+  height: $height-title;
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.desc {
+  height: $height-desc;
+  font-size: 1.2rem;
+  color: grey;
+}
+
+.footer {
+  display: flex;
+  height: $height-footer;
+  align-items: flex-end;
+  justify-content: center;
+  .price {
+    flex: auto;
+  }
+
+  .writer {
+    flex: 1;
+    text-align:end;
+  }
+}

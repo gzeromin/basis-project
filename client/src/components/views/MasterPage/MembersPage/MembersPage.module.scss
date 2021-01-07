@@ -29,6 +29,9 @@ $color-border: #EAEDED;
       .td {
         padding: 1rem;
         border: 1px solid $color-border;
+        &-ckBox {
+          transform: scale(1.7);
+        }
       }
       .td:first-child {
         text-align: center;

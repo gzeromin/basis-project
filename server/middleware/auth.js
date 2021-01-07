@@ -9,7 +9,6 @@ let auth = (req, res, next) => {
     if (err) throw err;
     if (!user)
       return res.json({
-        isLogin: false,
         isAuth: false
       });
 

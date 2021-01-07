@@ -1,8 +1,9 @@
 @import '../../../../scss/abstracts/variables';
 
 .postPage {
-  width: calc((100vw - #{ $personal-width }) * .7);
+  width: calc((100vw - #{ $personal-width }) * .9);
   padding: 3rem 4rem;
+  margin: 0 calc((100vw - #{ $personal-width }) * .05);
 }
 
 .videoDetail {

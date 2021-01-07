@@ -1,0 +1,19 @@
+@import '../../../../scss/abstracts/mixins';
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  * {
+    padding: .5rem;
+    @include mq-w('small-screen-1') {
+      width: 35rem;
+    }
+    @include mq-w('small-screen-2') {
+      width: 25rem;
+    }
+    @include mq-w('small-screen-3') {
+      width: 15rem;
+    }
+  }
+}

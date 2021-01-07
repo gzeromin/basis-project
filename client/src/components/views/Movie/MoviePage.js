@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import SubNavBar from "../../commons/SubNavBar/SubNavBar";
 
-import DefaultPage from './DefaltPage/DefaultPage';
+import DefaultPage from './DefaultPage/DefaultPage';
 import FavoritePage from './FavoritePage/FavoritePage';
 
 function MoviePage(props) {
@@ -19,8 +19,7 @@ function MoviePage(props) {
 
   return (
     <div>
-      {user.userData 
-        && user.userData.isLogin 
+      {user.userData
         && user.userData.isAuth 
         &&
           <SubNavBar 
@@ -28,8 +27,7 @@ function MoviePage(props) {
             funcMenus={funcMenus} 
           />
       }
-      <div className={`${user.userData 
-                        && user.userData.isLogin 
+      <div className={`${user.userData
                         && user.userData.isAuth ? 
                         'views-sub' 
                         : 

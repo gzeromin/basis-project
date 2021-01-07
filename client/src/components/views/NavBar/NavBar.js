@@ -30,24 +30,32 @@ function NavBar(props) {
     )
   } else {
     login = (
-      <i 
-        className={`material-icons ${style['login-area']}`}
-        onClick={logoutHandler}
-      >
-        logout
-      </i>
+      <div className={style.inline}>
+        <i 
+          className={`material-icons ${style['login-area']}`}
+          onClick={logoutHandler}
+          >
+          logout
+        </i>
+        {user.userData && user.userData.isAdmin
+          &&  <Link to="/master/home">
+                <i 
+                  className={`material-icons ${style['login-area']}`}
+                >
+                  admin_panel_settings
+                </i>
+              </Link>
+        }
+      </div>
     )
   }
 
   return (
     <div className={style['nav']}>
-      {user.userData && user.userData.isAdmin
-        &&  <div className={style['nav-master']}>
-              <Link to="/master/home">Master</Link> &nbsp;
-            </div>
-      }
-      <Link to="/video/home">Video</Link> &nbsp;
+      <Link to="/book/home">Book</Link>
+      <Link to="/video/home">Video</Link>
       <Link to="/movie/home">Movie</Link>
+      <Link to="/shop/home">Shop</Link>
       {login} 
     </div>
   )

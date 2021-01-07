@@ -12,6 +12,9 @@ import VideoDetail from "./views/Video/DetailPage/DetailPage";
 import MoviePage from "./views/Movie/MoviePage";
 import MovieDetail from "./views/Movie/DetailPage/DetailPage";
 import MasterPage from "./views/MasterPage/MasterPage";
+import BookPage from './views/Book/BookPage';
+import ShopPage from './views/Shop/ShopPage';
+
 
 function App() {
   return (
@@ -27,6 +30,8 @@ function App() {
           <Route exact path="/movie/:subFunc" component={Auth(MoviePage, null)} />
           <Route exact path="/movie/detail/:movieId" component={Auth(MovieDetail, null)} />
           <Route exact path="/master/:subFunc" component={Auth(MasterPage, true)} />
+          <Route exact path="/book/:subFunc" component={Auth(BookPage, null)} />
+          <Route exact path="/shop/:subFunc" component={Auth(ShopPage, null)} />
         </Switch>
       </div>
       <Footer />

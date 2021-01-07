@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 const express = require('express');
 const router = express.Router();
 const { auth } = require('../middleware/auth');
@@ -62,7 +63,6 @@ router.get('/auth', auth, (req, res) => {
   res.status(200).json(
     Object.assign(
       {
-        isLogin: true,
         isAuth: true,
         isAdmin: req.user.role === 0 ? false : true
       },
@@ -96,6 +96,7 @@ router.post('/updateMember', (req, res) => {
     if (err) return res.json({ success: false, err });
     return User.find((err, members) => {
       if (err) return res.json({ success: false, err });
+
       return res.status(200).send({
         success: true,
         result: members
@@ -111,7 +112,7 @@ router.post('/sendMail', (req, res) => {
   const mailOpt = {
     from: req.body.email,
     to: req.body.member.email,
-    subject: 'From J.Min World [메일 인증 해줭~~]',
+    subject: '[메일 인증 해줭~~] From J.Min World',
     html: mailText
   };
   User.findByIdAndUpdate(req.body.member._id, {$set: {mailCheckKey : mailCheckKey}}, {useFindAndModify: false}, (errSaveKey, resultSaveKey) => {
