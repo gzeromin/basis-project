@@ -67,7 +67,7 @@ function FavoritePage() {
   });
   
   return (
-    <div className={style.wrapper}>
+    <div className={`overflow-y ${style.wrapper}`}>
       <h2> Favorite Movies </h2>
       <hr />
       <table>

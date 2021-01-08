@@ -5,9 +5,10 @@ import Subscriber from './Sections/Subscriber';
 import Comments from '../../../commons/Comment/Comment';
 import LikeDislikes from '../../../commons/LikeDislikes/LikeDislikes';
 import style from './DetailPage.module.scss';
+import { getQueryString } from '../../../../utils/stringUtils';
 
 function VideoDetailPage(props) {
-  const videoId = props.match.params.videoId;
+  const videoId = getQueryString(props.location.search)['id'];
   const [ Video, setVideo ] = useState([]);
   const [ CommentLists, setCommentLists ] = useState([]);
 
@@ -37,7 +38,7 @@ function VideoDetailPage(props) {
     setCommentLists(CommentLists.concat(newComment));
   }
 
-  if (Video.writer) {
+  if (Video && Video.writer) {
 
     const subscribeButton = (Video.writer._id !== localStorage.getItem('userId') &&
       <Subscriber userTo={Video.writer._id} userFrom={localStorage.getItem('userId')} />);

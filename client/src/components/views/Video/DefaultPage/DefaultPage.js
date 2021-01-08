@@ -25,7 +25,7 @@ function DefaultPage(props) {
       <div 
         key={index}
       >
-        <a href={`/video/detail/${video._id}`}>
+        <a href={`/video/detail?id=${video._id}`}>
           <img alt='thumbnail' src={`http://localhost:9090/${video.thumbnail}`} />
           <div className="duration">
             <span>{minutes}:{seconds}</span>
@@ -43,7 +43,7 @@ function DefaultPage(props) {
   });
 
   return (
-    <div>
+    <div className='overflow-y'>
       <div>Recommended</div>
       <hr/><br/>
       <div className={style.wrapper}>

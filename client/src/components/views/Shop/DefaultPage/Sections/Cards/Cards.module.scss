@@ -10,7 +10,7 @@ $height-footer: 5rem;
 }
 
 .card {
-  margin: 1rem;
+  margin: .5rem;
   margin-top: 2rem;
   padding: 1rem;
   width: 30rem;
@@ -18,12 +18,14 @@ $height-footer: 5rem;
   border: 1px solid lightgrey;
   border-radius: .4rem;
   color: black;
+
 }
 
 .image {
   margin: 0 auto;
   width: 30rem;
   height: $height-image;
+  cursor: pointer;
 }
 
 .badges {

@@ -63,26 +63,21 @@ function Cards(props) {
       currentDiv(j);
     };
 
-    const images = product.images.map((image, j) =>{
-      if(j === 0) {
-        return <img 
-          key={j}
-          className={style.image} 
-          src={`http://localhost:9090/${image}`}
-          style={{ display : 'block' }}
-          onMouseEnter={stopPlay}
-          onMouseLeave={autoPlay}
-        />
-      }
-      return <img 
+    const goDetail = () => {
+      props.history.push(`/shop/detail?id=${product._id}`);
+    }
+
+    const images = product.images.map((image, j) => 
+      <img 
         key={j}
         className={style.image} 
         src={`http://localhost:9090/${image}`}
-        style={{ display : 'none' }}
+        style={ j === 0 ? { display : 'block' } : { display : 'none' }}
         onMouseEnter={stopPlay}
         onMouseLeave={autoPlay}
+        onClick={goDetail}
       />
-    });
+    );
 
     const badges = product.images.map((image, j) => 
       <span

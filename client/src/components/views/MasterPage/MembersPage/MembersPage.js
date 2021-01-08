@@ -273,7 +273,7 @@ function MembersPage(props) {
   });
 
   return (
-    <div className={style.wrapper}>
+    <div className={`overflow-y ${style.wrapper}`}>
       <p>Members</p>
       <hr/><br/>
       <table className={style.table}>

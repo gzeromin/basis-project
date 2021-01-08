@@ -8,10 +8,10 @@ import MainImage from '../commons/MainImage';
 import MovieInfo from './Sections/MovieInfo';
 import Favorite from './Sections/Favorite';
 import style from './DetailPage.module.scss';
-
+import { getQueryString } from '../../../../utils/stringUtils';
 function DetailPage(props) {
 
-  const movieId = props.match.params.movieId;
+  const movieId = getQueryString(props.location.search)['id'];
   const [Movie, setMovie] = useState([]);
   const [Casts, setCasts] = useState([]);
   const [CommentLists, setCommentLists] = useState([]);
@@ -60,7 +60,7 @@ function DetailPage(props) {
   }
 
   return (
-    <div>
+    <div className='overflow-y'>
       {/* Header */}
       {!LoadingForMovie ?
         <MainImage
@@ -124,8 +124,7 @@ function DetailPage(props) {
             userId={localStorage.getItem('userId')}
           />
         </div>
-
-        {/** Comments */}
+        {/* Comments */}
         <Comments 
           movieTitle={Movie.original_title}
           CommentLists={CommentLists}
@@ -133,10 +132,6 @@ function DetailPage(props) {
           refreshFunction={updateComment}
         />
       </div>
-
-      {/* Comments */}
-
-
     </div>
   )
 }

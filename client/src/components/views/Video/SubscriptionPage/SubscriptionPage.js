@@ -29,7 +29,7 @@ function SubscriptionPage() {
 
     return (
       <div key={index}>
-        <a href={`/video/detail/${video._id}`}>
+        <a href={`/video/detail?id=${video._id}`}>
           <img alt='thumbnail' src={`http://localhost:9090/${video.thumbnail}`} />
           <div className="duration">
             <span>{minutes}:{seconds}</span>
@@ -47,13 +47,11 @@ function SubscriptionPage() {
   });
 
   return (
-    <div>
-      <div>
-        <div>Subscribed Videos</div>
-        <hr/><br/>
-        <div className={style.wrapper}>
-          { renderCards }
-        </div>
+    <div className='overflow-y'>
+      <div>Subscribed Videos</div>
+      <hr/><br/>
+      <div className={style.wrapper}>
+        { renderCards }
       </div>
     </div>
   )

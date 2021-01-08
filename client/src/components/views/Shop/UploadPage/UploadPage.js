@@ -1,19 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import style from './UploadPage.module.scss';
 import FileUpload from '../../../commons/FileUpload/FileUpload';
-
-const Continents = [
-  { key: 1, value: "Africa" },
-  { key: 2, value: "Europe" },
-  { key: 3, value: "Asia" },
-  { key: 4, value: "North America" },
-  { key: 5, value: "South America" },
-  { key: 6, value: "Australia" },
-  { key: 7, value: "Antarctica" }
-]
+import { continents } from '../Constants';
 
 function UploadPage(props) {
 
@@ -79,7 +69,7 @@ function UploadPage(props) {
 
 
   return (
-    <div className={style.wrapper}>
+    <div className={`overflow-y ${style.wrapper}`}>
       <div className={style['wrapper-title']}>
         <h2>여행 상품 업로드</h2>
       </div>
@@ -102,8 +92,8 @@ function UploadPage(props) {
 
         <br/><br/>
         <select onChange={continentChangeHandler} value={Continent}>
-          {Continents.map((item, index) => (
-            <option key={index} value={item.key}>{item.value}</option>
+          {continents.map((item, index) => (
+            <option key={index} value={item._id}>{item.name}</option>
           ))}
         </select>
 

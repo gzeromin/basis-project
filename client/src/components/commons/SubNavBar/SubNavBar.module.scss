@@ -3,7 +3,7 @@
 .subNavBar {
   position: fixed;
   height: calc(100vh - #{ $nav-height } - #{ $footer-height});
-  width: $personal-width;
+  width: $subNavi-width;
   padding: 1rem;
   font-size: 2rem;
   font-weight: bold;

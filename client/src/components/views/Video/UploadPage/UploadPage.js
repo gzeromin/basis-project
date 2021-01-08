@@ -116,7 +116,7 @@ function VideoUploadPage(props) {
   }
 
   return (
-    <div>
+    <div className='overflow-y'>
       <div>
         Upload Video
       </div>

@@ -10,8 +10,11 @@
 .views {
   position: relative;
   height: $body-height;
-  overflow-y: scroll;
   &-sub {
-    margin-left: $personal-width;
+    margin-left: $subNavi-width;
   }
+}
+.overflow-y {
+  height: $body-height;
+  overflow-y: auto;
 }

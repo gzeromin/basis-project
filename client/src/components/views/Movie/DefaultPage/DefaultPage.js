@@ -31,7 +31,7 @@ function DefaultPage() {
   }
 
   return (
-    <div className={style.wrapper}>
+    <div className={`overflow-y ${style.wrapper}`}>
       {
         MainMovieImage &&
           <MainImage 

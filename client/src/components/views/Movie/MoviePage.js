@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import SubNavBar from "../../commons/SubNavBar/SubNavBar";
 
 import DefaultPage from './DefaultPage/DefaultPage';
 import FavoritePage from './FavoritePage/FavoritePage';
+import DetailPage from './DetailPage/DetailPage';
 
 function MoviePage(props) {
 
@@ -15,6 +16,8 @@ function MoviePage(props) {
   let showPage = <DefaultPage />;
   if(props.match.params.subFunc === 'favorite') {
     showPage = <FavoritePage />
+  } else if(props.match.params.subFunc === 'detail') {
+    showPage = <DetailPage {...props} />
   }
 
   return (

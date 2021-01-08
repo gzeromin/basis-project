@@ -23,12 +23,12 @@ function SideVideo() {
     return (
       <div className={style.wrapper} key={index}>
         <div className={style.sideVideo}>
-          <a className={style['sideVideo-link']} href={`/video/detail/${video._id}`}>
+          <a className={style['sideVideo-link']} href={`/video/detail?id=${video._id}`}>
             <img className={style['sideVideo-link-image']} src={`http://localhost:9090/${video.thumbnail}`} alt='thumbnail' />
           </a>
         </div>
         <div className={style.sideVideoInfo}>
-          <a href={`/video/detail/${video._id}`}>
+          <a href={`/video/detail?id=${video._id}`}>
             <span className={style['sideVideoInfo-title']}>{video.title}</span><br/>
             <span>{video.writer.name}</span><br/>
             <span>{video.views}</span><br/>

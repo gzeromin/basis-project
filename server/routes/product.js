@@ -62,15 +62,77 @@ router.post('/uploadProduct', (req, res) => {
 });
 
 router.post('/products', (req, res) => {
-  Product.find()
+
+  let order = req.body.order ?  req.body.order : 'desc';
+  let sortBy = req.body.sortBy ? req.body.sortBy : '_id';
+  let limit = req.body.limit ? parseInt(req.body.limit) : 20;
+  let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+  let term = req.body.searchTerm;
+
+  let findArgs = {};
+
+  for(let key in req.body.filters) {
+    if(req.body.filters[key].length > 0) {
+      if(key === 'price') {
+        findArgs[key] = {
+          //Greater than equal
+          $gte: req.body.filters[key][0],
+          //Less than equal
+          $lte: req.body.filters[key][1]
+        }
+      } else {
+        findArgs[key] = req.body.filters[key];
+      }
+    }
+  }
+
+  if(term) {
+    Product.find(findArgs)
+      .find({$text: {
+                      $search: term
+                    }})
+      .populate('writer')
+      .sort([[sortBy, order]])
+      .skip(skip)
+      .limit(limit)
+      .exec((err, productList) => {
+        if (err) return res.status(400).json({ success: false, err });
+        return res.status(200).json({
+          success: true,
+          productList
+        })
+      });
+  } else {
+    Product.find(findArgs)
+      .populate('writer')
+      .sort([[sortBy, order]])
+      .skip(skip)
+      .limit(limit)
+      .exec((err, productList) => {
+        if (err) return res.status(400).json({ success: false, err });
+        return res.status(200).json({
+          success: true,
+          productList
+        })
+      });
+  }
+});
+
+router.get('/products_by_id', (req, res) => {
+  //get product info by id from mongo db.
+  let type = req.query.type;
+  let productId = req.query.id;
+
+  Product.find({_id: productId})
     .populate('writer')
-    .exec((err, productList) => {
-      if(err) return res.status(400).json({
-        success: false, err
+    .exec((err, product) => {
+      if (err) return res.status(400).json({
+        success: false,
+        err
       });
       return res.status(200).json({
         success: true,
-        productList
+        product
       });
     });
 });

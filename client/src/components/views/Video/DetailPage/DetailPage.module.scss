@@ -1,9 +1,10 @@
 @import '../../../../scss/abstracts/variables';
 
 .postPage {
-  width: calc((100vw - #{ $personal-width }) * .9);
-  padding: 3rem 4rem;
-  margin: 0 calc((100vw - #{ $personal-width }) * .05);
+  padding: 3rem 1rem;
+  width: calc((100vw - #{ $subNavi-width }) * .7);
+  height: calc(#{ $body-height } - 1rem);
+  overflow-y: auto;
 }
 
 .videoDetail {
@@ -12,8 +13,10 @@
 
 .sidePage {
   position: fixed;
+  padding: 1rem;
   top: $nav-height;
   right: 0;
-  margin-top: 1rem;
-  width: calc((100vw - #{ $personal-width }) * .3);
+  width: calc((100vw - #{ $subNavi-width }) * .3);
+  height: calc(#{ $body-height });
+  overflow-y: auto;
 }

@@ -2,7 +2,7 @@ import React from 'react';
 
 function DefaultPage() {
   return (
-    <div>
+    <div className='overflow-y'>
       Welcome j.min
     </div>
   )
