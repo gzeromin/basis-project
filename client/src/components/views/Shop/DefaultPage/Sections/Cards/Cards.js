@@ -71,7 +71,7 @@ function Cards(props) {
       <img 
         key={j}
         className={style.image} 
-        src={`http://localhost:9090/${image}`}
+        src={`http://localhost:9090/${image.thumbnail}`}
         style={ j === 0 ? { display : 'block' } : { display : 'none' }}
         onMouseEnter={stopPlay}
         onMouseLeave={autoPlay}

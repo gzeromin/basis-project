@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import style from './UploadPage.module.scss';
-import FileUpload from '../../../commons/FileUpload/FileUpload';
+import FileUpload from './Sections/FileUpload/FileUpload';
 import { continents } from '../Constants';
 
 function UploadPage(props) {

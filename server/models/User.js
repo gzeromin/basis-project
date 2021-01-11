@@ -36,6 +36,14 @@ const userSchema = mongoose.Schema({
     type: Number,
     default: 1
   },
+  cart: {
+    type: Array,
+    default: []
+  },
+  history: {
+    type: Array,
+    default: []
+  },
   image: String,
   token: {
     type: String

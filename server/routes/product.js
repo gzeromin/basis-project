@@ -2,18 +2,25 @@
 const express = require('express');
 const router = express.Router();
 const { Product } = require('../models/Product');
+const { User } = require('../models/User');
+const { auth } = require('../middleware/auth');
+
 const multer = require('multer');
 const fs = require('fs');
+const gm = require('gm').subClass({imageMagick: true});
+
+const filePath = 'uploads/product';
 
 // STORAGE MULTER CONFIG
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/product/');
+    cb(null, filePath);
   },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}_${file.originalname}`);
   }
 });
+
 
 const upload = multer({ storage: storage }).array('files', 10);
 
@@ -21,21 +28,55 @@ router.post('/uploadImages', (req, res) => {
   //upload image
   upload(req, res, (err) => {
     if (err) {
-      console.log(err);
       return res.json({ success: false, err });
     }
-    const filePathList = req.files.map((file, index) => file.path);
+    const fileList = req.files.map((file, index) => {
+      return {
+        'path': file.path, 
+        'filename': file.filename
+      };
+    });
     return res.status(200).send({
       success: true,
-      filePathList
+      fileList
     });
   });
+});
+
+router.post('/thumbnail', async (req, res) => {
+  try {
+    const filePathList = await Promise.all(req.body.fileList.map(file => {
+      return new Promise((resolve, reject) => {
+        gm(file.path)
+        .thumb(300, 240, `${filePath}/thumbnails/thumbnail_${file.filename}`, function (err) {
+          if (err) {
+            console.log("??");
+            console.log(err);
+            reject(err);
+          } else {
+            resolve({
+              'image': file.path,
+              'thumbnail': `${filePath}/thumbnails/thumbnail_${file.filename}`
+            });
+          }
+        });
+      });
+    }));
+    return res.status(200).json({
+      success: true,
+      filePathList
+    })
+  } catch (err) {
+    return res.status(400).json({ success: false, err });
+  }
 });
 
 router.post('/deleteImage', (req, res) => {
   try {
     //delte image
-    fs.unlinkSync(req.body.image);
+    fs.unlinkSync(req.body.image.image);
+    //delete thumbnail
+    fs.unlinkSync(req.body.image.thumbnail);
     return res.status(200).send({
       success: true
     });
@@ -135,6 +176,60 @@ router.get('/products_by_id', (req, res) => {
         product
       });
     });
+});
+
+router.post('/addToCart', auth, (req, res) => {
+
+  //get user info
+  User.findOne({_id: req.user._id}, (err, userInfo) => {
+    let duplicate = false;
+    userInfo.cart.forEach(item => {
+      if(item.id === req.body.productId) {
+        duplicate = true;
+      }    
+    });
+
+    // exist product
+    if(duplicate) {
+      User.findOneAndUpdate(
+        {_id: req.user._id, 'cart.id': req.body.productId},
+        {$inc: {'cart.$.quantity': 1}},
+        {new: true},
+        (err, userInfo) => {
+          if (err) return res.status(200).json({
+            success: false, err
+          });
+          return res.status(200).json({
+            success: true, cart: userInfo.cart
+          });
+        }
+      )
+    } 
+    // not exist product
+    else {
+      User.findOneAndUpdate(
+        {_id: req.user._id},
+        {
+          $push: {
+            cart: {
+              id: req.body.productId,
+              quantity: 1,
+              data: Date.now()
+            }
+          }
+        },
+        {new: true},
+        (err, userInfo) => {
+          if (err) return res.status(400).json({
+            success: false, err
+          });
+          return res.status(200).json({
+            success: true, cart: userInfo.cart
+          })
+        }
+      )
+    }
+  });
 });
 
 module.exports = router;

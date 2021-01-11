@@ -18,6 +18,7 @@ function DefaultPage(props) {
   }, []);
   
   const renderCards = Videos.map((video, index) => {
+    if(!video.writer) return;
     var minutes = Math.floor(video.duration / 60);
     var seconds = Math.floor(video.duration - minutes * 60);
     

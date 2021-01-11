@@ -48,7 +48,8 @@ function DefaultPage(props) {
     let body = {
       skip: 0,
       limit: Limit,
-      filters: filters
+      filters: filters,
+      searchTerm: SearchTerm
     };
 
     getProductList(body);
@@ -70,7 +71,6 @@ function DefaultPage(props) {
   const handleFilters = (filters, category) => {
     const newFilters = {...Filters };
     newFilters[category] = filters;
-
     if(category === 'price') {
       let priceValues = handlePrice(filters);
       newFilters[category] = priceValues;

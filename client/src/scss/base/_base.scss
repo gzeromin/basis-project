@@ -2,7 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300&family=Nanum+Gothic:wght@400;700;800&display=swap');
 //icon font
 @import url("https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp");
-
+//React Carousel Image Gallery
+@import "~react-image-gallery/styles/scss/image-gallery.scss";
+// ant design
+@import 'antd/dist/antd.css';
 * {
   margin: 0;
   padding: 0;
