@@ -50,10 +50,10 @@ router.post('/thumbnail', async (req, res) => {
         gm(file.path)
         .thumb(300, 240, `${filePath}/thumbnails/thumbnail_${file.filename}`, function (err) {
           if (err) {
-            console.log("??");
             console.log(err);
             reject(err);
           } else {
+            console.log(file);
             resolve({
               'image': file.path,
               'thumbnail': `${filePath}/thumbnails/thumbnail_${file.filename}`
@@ -162,9 +162,15 @@ router.post('/products', (req, res) => {
 router.get('/products_by_id', (req, res) => {
   //get product info by id from mongo db.
   let type = req.query.type;
-  let productId = req.query.id;
+  let productIds = req.query.id;
 
-  Product.find({_id: productId})
+  if(type === 'array') {
+    //id=12312313,535252,74745464 =>
+    //productIds = [12312313,535252,74745464]
+    let ids = req.query.id.split(',');
+    productIds = ids.map(item => item);
+  }
+  Product.find({_id: {$in: productIds}})
     .populate('writer')
     .exec((err, product) => {
       if (err) return res.status(400).json({
@@ -230,6 +236,33 @@ router.post('/addToCart', auth, (req, res) => {
       )
     }
   });
+});
+
+router.get('/removeFromCart', auth, (req, res) => {
+  User.findOneAndUpdate(
+    {_id: req.user._id},
+    {
+      $pull: {
+        'cart': {'id': req.query.id}
+      }
+    },
+    {new: true},
+    (err, userInfo) => {
+      let cart = userInfo.cart;
+      let array = cart.map(item => {
+        return item.id
+      })
+
+      Product.find({_id: {$in: array}})
+        .populate('writer')
+        .exec((err, productInfo) => {
+          return res.status(200).json({
+            productInfo,
+            cart
+          });
+        });
+    }
+  )
 });
 
 module.exports = router;

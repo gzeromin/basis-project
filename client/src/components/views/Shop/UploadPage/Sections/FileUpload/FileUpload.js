@@ -28,7 +28,6 @@ function FileUpload(props) {
           fileList: res.data.fileList
         }
         axios.post('/api/product/thumbnail', variable).then(res => {
-          console.log(res.data);
           if(res.data.success) {
             setImages([...Images, ...res.data.filePathList]);
             props.refreshFunction([...Images, ...res.data.filePathList]);

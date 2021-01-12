@@ -1,0 +1,45 @@
+@import '../../../scss/abstracts/variables';
+
+$personal-bar-width: 34rem;
+
+.personal-bar {
+  position: fixed;
+  height: calc(100vh - #{ $nav-height } - #{ $footer-height});
+  width: $personal-bar-width;
+  padding: 2rem;
+  font-size: 2rem;
+  font-weight: bold;
+  .name {
+    text-align: center;
+    font-size: 3rem;
+    margin-top: .5rem;
+    .icon {
+      margin-left: .3rem;
+      vertical-align: middle;
+    }
+  }
+}
+
+.personal-view {
+  position: relative;
+  height: $body-height;
+  margin-left: $personal-bar-width;
+}
+
+.dropBox {
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 24rem;
+  height: 24rem;
+  border: 1px solid lightgrey;
+}
+.image {
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 24rem;
+  height: 24rem;
+}

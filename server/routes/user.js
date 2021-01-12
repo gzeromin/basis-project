@@ -4,6 +4,20 @@ const router = express.Router();
 const { auth } = require('../middleware/auth');
 const { User } = require('../models/User');
 const nodemailer = require('nodemailer');
+const multer = require('multer');
+const fs = require('fs');
+
+const filePath = 'uploads/user';
+
+// STORAGE MULTER CONFIG
+let storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, filePath);
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}_${file.originalname}`);
+  }
+});
 
 const createTransport = (user, pass) => {
   return nodemailer.createTransport({
@@ -16,6 +30,9 @@ const createTransport = (user, pass) => {
   });
 };
 
+const upload = multer({ storage: storage }).single('file');
+
+
 router.post('/register', (req, res) => {
   const user = new User(req.body);
   user.save((err, userInfo) => {
@@ -24,6 +41,30 @@ router.post('/register', (req, res) => {
       success: true,
       data: userInfo
     });
+  });
+});
+
+router.post('/uploadImage', auth, (req, res) => {
+  upload(req, res, (err) => {
+    if (err) {
+      return res.json({ success: false, err });
+    }
+    const filePath = res.req.file.path;
+    User.findOneAndUpdate(
+      {_id: req.user._id},
+      {$set: {
+        image: filePath
+      }},
+      (err, userInfo) => {
+        if (err) return res.status(400).json({
+          success: false, err
+        });
+        fs.unlinkSync(userInfo.image);
+        return res.status(200).json({
+          success: true, image: filePath
+        });
+      }
+    )
   });
 });
 
@@ -44,7 +85,6 @@ router.post('/login', (req, res) => {
           message: err
         });
       }
-
       //create token
       userInfo.generateToken((err, user) => {
         if (err) return res.status(400).send(err);

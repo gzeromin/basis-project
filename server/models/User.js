@@ -18,6 +18,9 @@ const userSchema = mongoose.Schema({
     type: String,
     maxlength: 50
   },
+  image: {
+    type: String
+  },
   comment: {
     type: String
   },

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import style from './Search.module.scss';
 
 function Search(props) {
@@ -29,4 +29,4 @@ function Search(props) {
   )
 }
 
-export default Search;
+export default memo(Search);

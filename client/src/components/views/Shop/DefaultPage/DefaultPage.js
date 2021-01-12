@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import style from './DefaultPage.module.scss';
 import axios from 'axios';
 import Cards from './Sections/Cards/Cards';
@@ -103,7 +103,7 @@ function DefaultPage(props) {
     getProductList(body);
     setSkip(skip);
   };
-
+  
   return (
     <div className={`overflow-y ${style.wrapper}`}>
       <h2>
@@ -140,4 +140,4 @@ function DefaultPage(props) {
   )
 }
 
-export default DefaultPage;
+export default memo(DefaultPage);

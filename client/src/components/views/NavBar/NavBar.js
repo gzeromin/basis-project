@@ -46,6 +46,13 @@ function NavBar(props) {
                 </i>
               </Link>
         }
+        <Link to="/personal/home">
+          <i 
+            className={`material-icons ${style['login-area']}`}
+          >
+            account_circle
+          </i>
+        </Link>
       </div>
     )
   }

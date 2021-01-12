@@ -4,7 +4,8 @@
   position: fixed;
   height: calc(100vh - #{ $nav-height } - #{ $footer-height});
   width: $subNavi-width;
-  padding: 1rem;
+  padding: 2rem;
   font-size: 2rem;
   font-weight: bold;
+  text-align: right;
 }

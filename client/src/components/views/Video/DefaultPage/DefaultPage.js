@@ -4,7 +4,6 @@ import moment from 'moment';
 import style from './DefaultPage.module.scss';
 
 function DefaultPage(props) {
-
   const [Videos, setVideos] = useState([]);
 
   useEffect(() => {
