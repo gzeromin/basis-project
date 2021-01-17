@@ -32,13 +32,14 @@ function LoginPage(props) {
     dispatch(loginUser(body))
       .then(res => {
         dispatch(setIsLoading(false));
-
         if(res.payload.success) {
           window.localStorage.setItem('userId', res.payload.data._id);
           props.history.push('/');
         } else {
           alert(res.payload.message);
         }
+      }).catch(err => {
+        console.log(err); //status 400
       });
   }
 

@@ -6,15 +6,11 @@ import DefaultPage from './DefaultPage/DefaultPage';
 import UploadPage from './UploadPage/UploadPage';
 import DetailPage from './DetailPage/DetailPage';
 import CartPage from './CartPage/CartPage';
+import HistoryPage from './HistoryPage/HistoryPage';
 
 function ShopPage(props) {
 
   const user = useSelector(state => state.user);
-  const funcMenus = [
-    'upload',
-    'cart'
-  ];
-
   let showPage = <DefaultPage {...props} />;
   if(props.match.params.subFunc === 'upload') {
     showPage = <UploadPage {...props} />;
@@ -22,6 +18,8 @@ function ShopPage(props) {
     showPage = <DetailPage {...props} />
   } else if(props.match.params.subFunc === 'cart') {
     showPage = <CartPage {...props} />
+  } else if(props.match.params.subFunc === 'history') {
+    showPage = <HistoryPage user={ user.userData }/>
   }
 
   return (
@@ -29,10 +27,7 @@ function ShopPage(props) {
       {user.userData
         && user.userData.isAuth 
         &&
-          <SubNavBar 
-            subRoot='shop' 
-            funcMenus={funcMenus} 
-          />
+          <SubNavBar subRoot='shop'/>
       }
       <div className={`${user.userData
                         && user.userData.isAuth ? 

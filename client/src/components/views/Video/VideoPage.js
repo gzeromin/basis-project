@@ -10,10 +10,6 @@ import DetailPage from './DetailPage/DetailPage';
 function Video(props) {
 
   const user = useSelector(state => state.user);
-  const funcMenus = [
-    'upload',
-    'subScription'
-  ];
 
   let showPage = <DefaultPage className='overflow-y'/>;
   if(props.match.params.subFunc === 'upload') {
@@ -29,10 +25,7 @@ function Video(props) {
       {user.userData
         && user.userData.isAuth 
         &&
-          <SubNavBar 
-            subRoot='video'
-            funcMenus={funcMenus} 
-          />
+          <SubNavBar subRoot='video' />
       }
       <div className={`${user.userData
                         && user.userData.isAuth ? 

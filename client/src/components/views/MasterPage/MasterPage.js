@@ -3,10 +3,7 @@ import SubNavBar from "../../commons/SubNavBar/SubNavBar";
 import DefaultPage from './DefaultPage/DefaultPage';
 import MembersPage from './MembersPage/MembersPage';
 function MasterPage(props) {
-  
-  const funcMenus = [
-    'members',
-  ];
+
 
   let showPage = <DefaultPage />;
   if(props.match.params.subFunc === 'members') {
@@ -17,10 +14,7 @@ function MasterPage(props) {
 
   return (
     <div>
-      <SubNavBar 
-        subRoot='master'
-        funcMenus={funcMenus} 
-      />
+      <SubNavBar subRoot='master'/>
       <div className='views-sub'>
         { showPage }
       </div>

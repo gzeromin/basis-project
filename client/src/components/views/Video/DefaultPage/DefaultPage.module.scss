@@ -1,4 +1,5 @@
 @import '../../../../scss/abstracts/mixins';
+@import '../../../../scss/abstracts/variables';
 
 .wrapper {
   display: flex;
@@ -14,6 +15,60 @@
     }
     @include mq-w('small-screen-3') {
       width: 15rem;
+    }
+  }
+}
+
+.card {
+  width: 34rem;
+  .video {
+    width: 100%;
+    height: 24rem;
+    .thumbnail {
+      width: 32rem;
+      height: 24rem;
+      margin: 0 auto;
+    }
+    text-align: end;
+    .duration {
+      width: 100%;
+      margin-top: -4rem;
+      &-text {
+        font-weight: bold;
+        font-size: 1.4rem;
+        background-color: black;
+        color: white;
+      }
+    }
+  }
+  .info {
+    display: flex;
+    .left {
+      flex: 6rem;
+      .avatar {
+        width: 6rem;
+        border-radius: 50%;
+      }
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+      .title {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+      .writer {
+        line-height: .4rem;
+      }
+      .foot {
+        padding: .2rem 0;
+        .views {
+
+        }
+        .date {
+
+        }
+      }
     }
   }
 }

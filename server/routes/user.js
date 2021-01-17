@@ -59,7 +59,9 @@ router.post('/uploadImage', auth, (req, res) => {
         if (err) return res.status(400).json({
           success: false, err
         });
-        fs.unlinkSync(userInfo.image);
+        { userInfo.image &&
+          fs.unlinkSync(userInfo.image);
+        }
         return res.status(200).json({
           success: true, image: filePath
         });
@@ -77,17 +79,22 @@ router.post('/login', (req, res) => {
         message: 'There is no user'
       });
     }
+    
     //check password
     userInfo.comparePassword(req.body.password, (err, isMatch) => {
       if (!isMatch) {
         return res.json({
-          sucess: false,
+          success: false,
           message: err
         });
       }
       //create token
       userInfo.generateToken((err, user) => {
-        if (err) return res.status(400).send(err);
+        console.log(err);
+        if (err) return res.json({
+          success: false,
+          message: err
+        });
 
         // save token. where? cookie, localStorage --> cookie here
         res.cookie('x_auth', user.token).status(200).json({

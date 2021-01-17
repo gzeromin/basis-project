@@ -5,7 +5,8 @@ import {
   ADD_TO_CART,
   UPDATE_CART_INFO,
   SET_IMAGE,
-  SAVE_IMAGE
+  SAVE_IMAGE,
+  ON_SUCCESS_BUY
 } from '../_actions/types';
 
 export default function (state={}, action) {
@@ -32,6 +33,8 @@ export default function (state={}, action) {
         ...state.userData,
         cart: action.payload
       }};
+    case ON_SUCCESS_BUY:
+      return {...state, userData: action.payload.user};
     default:
       return state;
   }

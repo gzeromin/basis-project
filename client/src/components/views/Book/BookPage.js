@@ -7,9 +7,6 @@ import DefaultPage from './DefaultPage/DefaultPage';
 function BookPage(props) {
 
   const user = useSelector(state => state.user);
-  const funcMenus = [
-    'gg',
-  ];
 
   let showPage = <DefaultPage />;
   if(props.match.params.subFunc === 'favorite') {
@@ -20,10 +17,7 @@ function BookPage(props) {
       {user.userData
         && user.userData.isAuth 
         &&
-          <SubNavBar 
-            subRoot='book' 
-            funcMenus={funcMenus} 
-          />
+          <SubNavBar subRoot='book' />
       }
       <div className={`${user.userData
                         && user.userData.isAuth ? 

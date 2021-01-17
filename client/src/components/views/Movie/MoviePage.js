@@ -9,9 +9,6 @@ import DetailPage from './DetailPage/DetailPage';
 function MoviePage(props) {
 
   const user = useSelector(state => state.user);
-  const funcMenus = [
-    'favorite',
-  ];
 
   let showPage = <DefaultPage />;
   if(props.match.params.subFunc === 'favorite') {
@@ -25,10 +22,7 @@ function MoviePage(props) {
       {user.userData
         && user.userData.isAuth 
         &&
-          <SubNavBar 
-            subRoot='movie' 
-            funcMenus={funcMenus} 
-          />
+          <SubNavBar subRoot='movie' />
       }
       <div className={`${user.userData
                         && user.userData.isAuth ? 

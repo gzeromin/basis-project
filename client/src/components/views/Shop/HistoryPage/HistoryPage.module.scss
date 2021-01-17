@@ -1,0 +1,19 @@
+$color-border: #EAEDED;
+
+.table {
+  margin: 0 auto;
+  border: 1px solid $color-border;
+  .tr{
+    .th {
+      padding: 1rem;
+      border: 1px solid $color-border;
+    }
+    .td {
+      padding: .7rem;
+      border: 1px solid $color-border;
+    }
+    &:nth-child(even) {
+      background-color: #eaeded79;
+    }
+  }
+}

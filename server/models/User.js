@@ -76,8 +76,9 @@ userSchema.pre('save', function (next) {
 userSchema.methods.comparePassword = function (plainPassword, cb) {
   const user = this;
   bcrypt.compare(plainPassword, this.password, function (err, isMatch) {
-    if (err) return cb('unvalid password');
+    if (err) return cb(err, isMatch);
     if (user.mailCheck !== 1) return cb('not yet mail checked');
+    if(!isMatch) return cb('unvalid password');
     cb(null, isMatch);
   });
 };

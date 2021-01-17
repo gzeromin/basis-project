@@ -6,10 +6,6 @@ import style from '../DefaultPage/DefaultPage.module.scss';
 function SubscriptionPage() {
 
   const [Videos, setVideos] = useState([]);
-  const [funcMenus, setFuncMenus] = useState([
-    'upload',
-    'subScription'
-  ]);
 
   let variable = { userFrom: localStorage.getItem('userId')};
 

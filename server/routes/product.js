@@ -3,8 +3,9 @@ const express = require('express');
 const router = express.Router();
 const { Product } = require('../models/Product');
 const { User } = require('../models/User');
+const { Payment } = require('../models/Payment');
 const { auth } = require('../middleware/auth');
-
+const async = require('async');
 const multer = require('multer');
 const fs = require('fs');
 const gm = require('gm').subClass({imageMagick: true});
@@ -261,6 +262,78 @@ router.get('/removeFromCart', auth, (req, res) => {
             cart
           });
         });
+    }
+  )
+});
+
+router.post('/successBuy', auth, (req, res) => {
+
+  //1. put simple payment information 
+  //   in history field of User Collection
+  let history = [];
+  let transactionData = {};
+
+  req.body.cartDetail.forEach((item) => {
+    history.push({
+      dateOfPurchase: Date.now(),
+      name: item.title,
+      id: item._id,
+      price: item.price,
+      quantity: item.quantity,
+      paymentId: req.body.paymentData.paymentID
+    });
+  });
+
+  //2. put detail payment information
+  //   in Payment Collection
+  transactionData.user = {
+    id: req.user._id,
+    name: req.user.name,
+    email: req.user.email
+  }
+  transactionData.data = req.body.paymentData;
+  transactionData.product = history;
+  
+  //  SAVE history info
+  User.findOneAndUpdate(
+    { _id: req.user._id },
+    { $push: {history: history}, $set: { cart: [] } },
+    { new: true },
+    (err, user) => {
+      if (err) return res.json({ success: false, err });
+      
+      // save transactionData in Payment
+      const payment = new Payment(transactionData);
+      payment.save((err, doc) => {
+        if (err) return res.json({ success: false, err });
+        
+        // update sold field in Product Collection
+        // how many quantity per product
+        let products = [];
+        doc.product.forEach(item => {
+          products.push({ id: item.id, quantity: item.quantity });
+        });
+        async.eachSeries(products, (item, callback) => {
+          Product.update(
+            {_id: item.id},
+            {
+              $inc: {
+                "sold": item.quantity
+              }
+            },
+            {new: false},
+            callback
+          )
+        }, (err, doc) => {
+          if (err) return res.status(400).json({ success: false, err});
+          console.log(doc);
+          return res.status(200).json({
+            success: true,
+            user: user
+          });
+        })
+        
+      })
     }
   )
 });
