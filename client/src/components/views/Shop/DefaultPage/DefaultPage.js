@@ -2,7 +2,7 @@
 import React, { useEffect, useState, memo } from 'react';
 import style from './DefaultPage.module.scss';
 import axios from 'axios';
-import Cards from './Sections/Cards/Cards';
+import Card from './Sections/Card/Card';
 import CheckboxList from './Sections/Filters/CheckboxList';
 import RadioList from './Sections/Filters/RadioList';
 import Search from './Sections/Search/Search';
@@ -123,7 +123,17 @@ function DefaultPage(props) {
       </div>
 
       {/** Cards */}
-      <Cards ProductList={ProductList} history={props.history}/>
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        {
+          ProductList.map((product, i) => 
+            <Card 
+              key={i}
+              product={product}
+              history={props.history}
+            />
+          )
+        }
+      </div>
       <br/>
 
       {/** Load more cards */}
