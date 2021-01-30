@@ -1,0 +1,15 @@
+.tictactoe {
+  margin: 3rem;
+  td {
+    width: 8rem;
+    height: 8rem;
+    border: 2px solid black;
+    text-align: center;
+    font-size: 4rem;
+  }
+}
+
+.result {
+  margin: 3rem;
+  font-size: 4rem;
+}

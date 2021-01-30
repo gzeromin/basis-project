@@ -63,6 +63,8 @@ function NavBar(props) {
       <Link to="/video/home">Video</Link>
       <Link to="/movie/home">Movie</Link>
       <Link to="/shop/home">Shop</Link>
+      <Link to="/zeroCho/home">ZeroCho</Link>
+
       {login} 
     </div>
   )

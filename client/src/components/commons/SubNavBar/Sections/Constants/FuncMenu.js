@@ -21,10 +21,19 @@ const video = [
   { name : 'subScription' }
 ];
 
+const zeroCho = [
+  { name : 'lotto' },
+  { name : 'lottoCls' },
+  { name : 'ticTacToe' },
+  { name : 'mineSearch' },
+
+];
+
 export default {
   shop,
   book,
   master,
   movie,
-  video
+  video,
+  zeroCho
 }
