@@ -1,6 +1,7 @@
 import React, { memo, useState, useReducer, useCallback, useEffect, useRef } from 'react';
 import Table from './Table';
 import style from './TicTacToe.module.scss';
+const produce = require('immer');
 
 const initialState = {
   winner: '',
@@ -19,34 +20,28 @@ const CHANGE_TURN = 'CHANGE_TURN';
 const RESET_GAME = 'RESET_GAME';
 
 const reducer = (state, action) => {
-  switch (action.type) {
-    case SET_WINNTER:
-      return {
-        ...state,
-        winner: action.winner
-      }  
-    case CLICK_CELL:
-      const tableData = [...state.tableData];
-      tableData[action.row] = [...tableData[action.row]]; //immer
-      tableData[action.row][action.cell] = state.turn;
-      return {
-        ...state,
-        tableData,
-        recentCell: [action.row, action.cell]
-      }
-    case CHANGE_TURN:
-      return {
-        ...state,
-        turn: state.turn === 'o' ? 'x' : 'o'
-      }
-    case RESET_GAME: 
-      return {
-        ...initialState,
-        winner: state.winner
-      }
-    default:
-      break;
-  }
+  return produce(state, draft => {
+    switch (action.type) {
+      case SET_WINNTER:
+        draft.winner = action.winner;
+        break;
+      case CLICK_CELL:
+        draft.tableData[action.row][action.cell] = draft.turn;
+        draft.recentCell = [action.row, action.cell];
+        break;
+      case CHANGE_TURN:
+        draft.turn = draft.turn === 'o' ? 'x' : 'o';
+        break;
+      case RESET_GAME:
+        draft = {
+          ...initialState,
+          winner: draft.winner
+        }
+        break;
+      default:
+        break;
+    }
+  });
 }
 
 function TikTakTo() {
