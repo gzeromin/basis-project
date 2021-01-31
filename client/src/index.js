@@ -11,10 +11,15 @@ import ReduxThunk from 'redux-thunk';
 import Reducer from './_reducers';
 const { composeWithDevTools } = require('redux-devtools-extension');
 
-const createStoreWithMiddleware = composeWithDevTools(applyMiddleware(
-  promiseMiddleware, 
-  ReduxThunk
-))(createStore);
+const createStoreWithMiddleware = process.env.NODE_ENV === 'production' 
+  ? applyMiddleware(
+    promiseMiddleware, 
+    ReduxThunk
+  )(createStore)
+  : composeWithDevTools(applyMiddleware(
+    promiseMiddleware, 
+    ReduxThunk
+  ))(createStore)
 
 ReactDOM.render(
   <Provider
