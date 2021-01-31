@@ -1,7 +1,7 @@
 import React, { memo, useState, useReducer, useCallback, useEffect, useRef } from 'react';
 import Table from './Table';
 import style from './TicTacToe.module.scss';
-const produce = require('immer');
+const { produce } = require('immer');
 
 const initialState = {
   winner: '',
@@ -26,16 +26,16 @@ const reducer = (state, action) => {
         draft.winner = action.winner;
         break;
       case CLICK_CELL:
-        draft.tableData[action.row][action.cell] = draft.turn;
+        draft.tableData[action.row][action.cell] = state.turn;
         draft.recentCell = [action.row, action.cell];
         break;
       case CHANGE_TURN:
-        draft.turn = draft.turn === 'o' ? 'x' : 'o';
+        draft.turn = state.turn === 'o' ? 'x' : 'o';
         break;
       case RESET_GAME:
         draft = {
           ...initialState,
-          winner: draft.winner
+          winner: state.winner
         }
         break;
       default:
