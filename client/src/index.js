@@ -9,21 +9,22 @@ import { applyMiddleware, createStore } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 import Reducer from './_reducers';
-const { composeWithDevTools } = require('redux-devtools-extension');
 
-const createStoreWithMiddleware = process.env.NODE_ENV === 'production' 
-  ? applyMiddleware(
-    promiseMiddleware, 
-    ReduxThunk
-  )(createStore)
-  : composeWithDevTools(applyMiddleware(
-    promiseMiddleware, 
-    ReduxThunk
-  ))(createStore)
+const createStoreWithMiddleware = applyMiddleware(
+  promiseMiddleware, 
+  ReduxThunk
+)(createStore);
 
 ReactDOM.render(
   <Provider
-    store = {createStoreWithMiddleware(Reducer)}
+    store = {
+      process.env.NODE_ENV === 'production' ?
+        createStoreWithMiddleware(Reducer) :
+        createStoreWithMiddleware(Reducer,
+          window.__REDUX_DEVTOOLS_EXTENSION__ &&
+          window.__REDUX_DEVTOOLS_EXTENSION__()
+        )
+    }
   >
     <BrowserRouter>
       <App />
