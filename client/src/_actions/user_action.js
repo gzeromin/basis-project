@@ -15,13 +15,24 @@ export async function loginUser(dataToSubmit) {
   }
 }
 
-export async function registerUser(dataToSubmit) {
-  const request = await axios.post('/api/user/register', dataToSubmit)
-    .then(res => res.data );
-  return {
-    type: REGISTER_USER,
-    payload: request
+export function registerUser(dataToSubmit) {
+  return function(dispatch, getState) {
+    try {
+      const request = axios.post('/api/user/register', dataToSubmit).then(res => res.data );
+      dispatch({
+        type: REGISTER_USER,
+        payload: request
+      })
+    } catch (e) {
+      /// nothing
+    }
   }
+  // const request = axios.post('/api/user/register', dataToSubmit)
+  //   .then(res => res.data );
+  // return {
+  //   type: REGISTER_USER,
+  //   payload: request
+  // }
 }
 
 export async function auth(dataToSubmit) {

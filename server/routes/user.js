@@ -90,7 +90,6 @@ router.post('/login', (req, res) => {
       }
       //create token
       userInfo.generateToken((err, user) => {
-        console.log(err);
         if (err) return res.json({
           success: false,
           message: err
