@@ -37,7 +37,9 @@ const reducer = (state, action) => {
           ...initialState,
           winner: state.winner
         }
-        break;
+        //////////////////////////////////
+        ////////zeroCho comment///////////
+        return draft;
       default:
         break;
     }
